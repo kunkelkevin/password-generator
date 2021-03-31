@@ -6,6 +6,7 @@ var passwordType = {
   chosen : "",
 };
 passwordType.uppercase= passwordType.lowercase.toUpperCase();
+var passwordLength = 0;
 
 var choosePasswordType = function (){
   passwordType.chosen = "";
@@ -31,12 +32,23 @@ var choosePasswordType = function (){
   }
 
 };
+
+var choosePasswordLength = function(){
+  passwordLength = window.prompt("Please choose the length of you password between 8 and 120 characters.");
+  if (passwordLength<8 || passwordLength>120){
+    window.alert("That is not a valid response");
+    choosePasswordLength();
+  }
+  console.log(passwordLength);
+};
 var generatePassword=function(){
   
   choosePasswordType();
+  choosePasswordLength();
+  console.log(passwordLength);
   
   
-   return passwordType.chosen;
+   return passwordLength + passwordType.chosen;
 };
 
 
