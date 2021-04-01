@@ -26,8 +26,9 @@ var choosePasswordType = function () {
     window.alert(
       "Please choose at least one type (Lowercase, Uppercase, Numeric, Special) so a password can be generated."
     );
-    choosePasswordType();
+    return choosePasswordType();
   }
+  console.log(wantLowercase);
   if (wantLowercase) {
     passwordType.chosen += passwordType.lowercase;
     passwordLength--;
