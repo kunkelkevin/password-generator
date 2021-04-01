@@ -13,8 +13,11 @@ var newPassword = "";
 // Function to choose what types of characters are wanted in the password
 
 var choosePasswordType = function () {
+  choosePasswordLength();
   passwordType.chosen = "";
   newPassword = "";
+  validation = "";
+  remainingPasswordLength = passwordLength;
   wantLowercase = window.confirm(
     "Do you want lowercase letters in your password?"
   );
@@ -36,7 +39,8 @@ var choosePasswordType = function () {
   // type to newPassword to ensure every chosen character type is part of the displayed password.
   if (wantLowercase) {
     passwordType.chosen += passwordType.lowercase;
-    passwordLength--;
+    validation += "Lowercase letters \n";
+    remainingPasswordLength--;
     newPassword +=
       passwordType.lowercase[
         Math.floor(Math.random() * passwordType.lowercase.length)
@@ -44,7 +48,8 @@ var choosePasswordType = function () {
   }
   if (wantUppercase) {
     passwordType.chosen += passwordType.uppercase;
-    passwordLength--;
+    validation += "Uppercase letters \n";
+    remainingPasswordLength--;
     newPassword +=
       passwordType.uppercase[
         Math.floor(Math.random() * passwordType.uppercase.length)
@@ -52,7 +57,8 @@ var choosePasswordType = function () {
   }
   if (wantNumeric) {
     passwordType.chosen += passwordType.numeric;
-    passwordLength--;
+    validation += "Numbers \n";
+    remainingPasswordLength--;
     newPassword +=
       passwordType.numeric[
         Math.floor(Math.random() * passwordType.numeric.length)
@@ -60,11 +66,18 @@ var choosePasswordType = function () {
   }
   if (wantSpecial) {
     passwordType.chosen += passwordType.special;
-    passwordLength--;
+    validation += "Special characters \n";
+    remainingPasswordLength--;
     newPassword +=
       passwordType.special[
         Math.floor(Math.random() * passwordType.special.length)
       ];
+  }
+  // Validation of chosen parameters
+  if (!window.confirm("Do you want an " + passwordLength + " character password containing the following characters: \n\n" + validation)){
+    return choosePasswordType();
+  } else {
+    passwordLength=remainingPasswordLength;
   }
 };
 
@@ -96,7 +109,6 @@ var scrambler = function(){
 // Main function used to create password
 
 var generatePassword = function () {
-  choosePasswordLength();
   choosePasswordType();
   for (var i = 1; i <= passwordLength; i++) {
     newPassword +=
