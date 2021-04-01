@@ -1,56 +1,92 @@
 // Assignment code here
 var passwordType = {
-  lowercase : "abcdefghijklmnopqrstuvwxyz",
-  numeric : "0123456789",
-  special : " !#$%&'()*+,-./:;<=>?@[\]^_`{|}~" + '"',
-  chosen : "",
+  lowercase: "abcdefghijklmnopqrstuvwxyz",
+  numeric: "0123456789",
+  special: " !#$%&'()*+,-./:;<=>?@[]^_`{|}~" + '"',
+  chosen: "",
 };
-passwordType.uppercase= passwordType.lowercase.toUpperCase();
+passwordType.uppercase = passwordType.lowercase.toUpperCase();
 var passwordLength = 0;
+var newPassword = "";
 
-var choosePasswordType = function (){
+var choosePasswordType = function () {
   passwordType.chosen = "";
-  wantLowercase = window.confirm("Do you want lowercase letters in your password?");
-  wantUppercase = window.confirm("Do you want uppercase letters in your password?");
+  newPassword = "";
+  wantLowercase = window.confirm(
+    "Do you want lowercase letters in your password?"
+  );
+  wantUppercase = window.confirm(
+    "Do you want uppercase letters in your password?"
+  );
   wantNumeric = window.confirm("Do you want numbers in your password?");
-  wantSpecial = window.confirm("Do you want special characters in your password?");
-  if (!wantLowercase && !wantUppercase && !wantSpecial && !wantNumeric){
-    window.alert("Please choose at least one type (Lowercase, Uppercase, Numeric, Special) so a password can be generated.");
+  wantSpecial = window.confirm(
+    "Do you want special characters in your password?"
+  );
+  if (!wantLowercase && !wantUppercase && !wantSpecial && !wantNumeric) {
+    window.alert(
+      "Please choose at least one type (Lowercase, Uppercase, Numeric, Special) so a password can be generated."
+    );
     choosePasswordType();
   }
-  if (wantLowercase){
+  if (wantLowercase) {
     passwordType.chosen += passwordType.lowercase;
+    passwordLength--;
+    newPassword +=
+      passwordType.lowercase[
+        Math.floor(Math.random() * passwordType.lowercase.length)
+      ];
+    console.log(newPassword);
   }
-  if (wantUppercase){
+  if (wantUppercase) {
     passwordType.chosen += passwordType.uppercase;
+    passwordLength--;
+    newPassword +=
+      passwordType.uppercase[
+        Math.floor(Math.random() * passwordType.uppercase.length)
+      ];
+    console.log(newPassword);
   }
-  if (wantNumeric){
+  if (wantNumeric) {
     passwordType.chosen += passwordType.numeric;
+    passwordLength--;
+    newPassword +=
+      passwordType.numeric[
+        Math.floor(Math.random() * passwordType.numeric.length)
+      ];
+    console.log(newPassword);
   }
-  if (wantSpecial){
+  if (wantSpecial) {
     passwordType.chosen += passwordType.special;
+    passwordLength--;
+    newPassword +=
+      passwordType.special[
+        Math.floor(Math.random() * passwordType.special.length)
+      ];
+    console.log(newPassword);
   }
-
 };
 
-var choosePasswordLength = function(){
-  passwordLength = window.prompt("Please choose the length of you password between 8 and 120 characters.");
-  if (passwordLength<8 || passwordLength>120){
+var choosePasswordLength = function () {
+  passwordLength = window.prompt(
+    "Please choose the length of you password between 8 and 120 characters."
+  );
+  if (passwordLength < 8 || passwordLength > 120) {
     window.alert("That is not a valid response");
     choosePasswordLength();
   }
-  console.log(passwordLength);
 };
-var generatePassword=function(){
-  
-  choosePasswordType();
+var generatePassword = function () {
   choosePasswordLength();
-  console.log(passwordLength);
-  
-  
-   return passwordLength + passwordType.chosen;
-};
+  choosePasswordType();
+  for (var i = 1; i <= passwordLength; i++) {
+    newPassword +=
+      passwordType.chosen[
+        Math.floor(Math.random() * passwordType.chosen.length)
+      ];
+  }
 
+  return newPassword;
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -61,7 +97,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
