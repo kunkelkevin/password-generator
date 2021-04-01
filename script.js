@@ -76,6 +76,18 @@ var choosePasswordLength = function () {
     choosePasswordLength();
   }
 };
+
+var scrambler = function(){
+  newPassword = newPassword.split("");
+  for (i=0; i<newPassword.length; i++){
+    var randomSpot = Math.floor(Math.random()*newPassword.length);
+    var temp = newPassword[i];
+    newPassword[i]=newPassword[randomSpot];
+    newPassword[randomSpot]=temp;
+  }
+  newPassword = newPassword.join("");
+}
+
 var generatePassword = function () {
   choosePasswordLength();
   choosePasswordType();
@@ -85,7 +97,8 @@ var generatePassword = function () {
         Math.floor(Math.random() * passwordType.chosen.length)
       ];
   }
-
+  console.log(newPassword);
+  scrambler();
   return newPassword;
 };
 
