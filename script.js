@@ -9,11 +9,14 @@ var passwordType = {
 passwordType.uppercase = passwordType.lowercase.toUpperCase();
 var passwordLength = 0;
 var newPassword = "";
+var skipLengthChoice = false;
 
 // Function to choose what types of characters are wanted in the password
 
 var choosePasswordType = function () {
+  if (!skipLengthChoice){
   choosePasswordLength();
+}
   passwordType.chosen = "";
   newPassword = "";
   validation = "";
@@ -33,6 +36,7 @@ var choosePasswordType = function () {
     window.alert(
       "Please choose at least one type (Lowercase, Uppercase, Numeric, Special) so a password can be generated."
     );
+    skipLengthChoice = true;
     return choosePasswordType();
   }
   // Conditional statements to add the chosen password types to the "chosen" string.  Will also add one of that character
@@ -75,6 +79,7 @@ var choosePasswordType = function () {
   }
   // Validation of chosen parameters
   if (!window.confirm("Do you want an " + passwordLength + " character password containing the following characters: \n\n" + validation)){
+    skipLengthChoice=false;
     return choosePasswordType();
   } else {
     passwordLength=remainingPasswordLength;
