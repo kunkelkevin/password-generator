@@ -13,7 +13,7 @@ There is logic added to ensure that at least one character from each chosen char
 The website is [https://kunkelkevin.github.io/password-generator/](https://kunkelkevin.github.io/password-generator/)
 
 Screenshot showing a generated password (ten characters using all types):
-![Desktop screenshot](assets/img/screenshot-password.png "Desktop screenshot")
+![Desktop screenshot](/screenshot-password.png "Generated password")
 
 Screenshot of final validation prompt:
-![Mobile screenshot](assets/img/screenshot-validation.png "Mobile screenshot")
+![Mobile screenshot](/screenshot-validation.png "User Validation choice")

@@ -16,7 +16,8 @@ var skipLengthChoice = false;
 var choosePasswordType = function () {
   if (!skipLengthChoice){
   choosePasswordLength();
-}
+  }
+  skipLengthChoice = false;
   passwordType.chosen = "";
   newPassword = "";
   validation = "";
