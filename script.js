@@ -74,20 +74,29 @@ var choosePasswordType = function () {
       ];
   }
   // Validation of chosen parameters
-  if (!window.confirm("Do you want an " + passwordLength + " character password containing the following characters: \n\n" + validation)){
+  if (
+    !window.confirm(
+      "Do you want an " +
+        passwordLength +
+        " character password containing the following characters: \n\n" +
+        validation
+    )
+  ) {
     return choosePasswordType();
   } else {
-    passwordLength=remainingPasswordLength;
+    passwordLength = remainingPasswordLength;
   }
 };
 
 // Function to get user input for desired password length with check to ensure it is between 8 and 120
 
 var choosePasswordLength = function () {
-  passwordLength = window.prompt(
-    "Please choose the length of you password between 8 and 120 characters."
+  passwordLength = parseInt(
+    window.prompt(
+      "Please choose the length of you password between 8 and 120 characters."
+    )
   );
-  if (passwordLength < 8 || passwordLength > 120) {
+  if (passwordLength < 8 || passwordLength > 120 || isNaN(passwordLength)) {
     window.alert("That is not a valid response");
     choosePasswordLength();
   }
@@ -95,16 +104,16 @@ var choosePasswordLength = function () {
 
 // Function that goes through each letter in password and swaps with another random letter in the password
 
-var scrambler = function(){
+var scrambler = function () {
   newPassword = newPassword.split("");
-  for (i=0; i<newPassword.length; i++){
-    var randomSpot = Math.floor(Math.random()*newPassword.length);
+  for (i = 0; i < newPassword.length; i++) {
+    var randomSpot = Math.floor(Math.random() * newPassword.length);
     var temp = newPassword[i];
-    newPassword[i]=newPassword[randomSpot];
-    newPassword[randomSpot]=temp;
+    newPassword[i] = newPassword[randomSpot];
+    newPassword[randomSpot] = temp;
   }
   newPassword = newPassword.join("");
-}
+};
 
 // Main function used to create password
 
@@ -116,7 +125,7 @@ var generatePassword = function () {
         Math.floor(Math.random() * passwordType.chosen.length)
       ];
   }
-  // Since the first 1-4 character are already assigned a specific chosen character type, scrambler added 
+  // Since the first 1-4 character are already assigned a specific chosen character type, scrambler added
   // to reorder list and have random order.
   scrambler();
   return newPassword;
